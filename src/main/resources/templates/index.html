@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Daftar Konsumen</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+		integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+	<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+	<script src="/js/datatable.js"></script>
+</head>
+
+<body>
+
+	<div class="card">
+		<div class="card-body">
+			<div th:switch="${konsumen}">
+				<h1>Daftar Konsumen</h1>
+				<div class="alert alert-success" role="alert" th:text="${success}" th:if="${success}"></div>
+				<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
+				<p class="my-3">
+					<a th:href="@{/konsumen/create}" class="btn btn-primary">
+						<i class="fas fa-user-plus ml-2"> Tambah Konsumen</i>
+					</a>
+
+				</p>
+				<div class="col-md-10">
+					<form th:action="@{/konsumen}" method="get">
+						<input type="text" name="keyword"
+							placeholder="Search with params" size="50">
+						<button type="submit" class="btn btn-info">Search</button>
+					</form>
+					<div th:if="${message}" th:text="${message}" th:class="${'alert ' + alertClass}"></div>
+					<div th:case="*">
+						<table class="table table-striped table-responsive-md mb-3" id="konsumenTable">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nama</th>
+									<th>Alamat</th>
+									<th>Kota</th>
+									<th>Provinsi</th>
+									<th>Tanggal Registrasi</th>
+									<th>Status</th>
+									<th>Aksi</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="konsumen : ${konsumen}">
+									<td th:text="${konsumen.id}"></td>
+									<td th:text="${konsumen.nama}"></td>
+									<td th:text="${konsumen.alamat}"></td>
+									<td th:text="${konsumen.kota}"></td>
+									<td th:text="${konsumen.provinsi}"></td>
+									<td th:text="${konsumen.tgl_registrasi}"></td>
+									<td th:text="${konsumen.status}"></td>
+									<td>
+										<a th:href="@{/konsumen/edit/{id}(id=${konsumen.id})}" class="btn btn-info">
+											<i class="fas fa-user-edit ml-2"></i>
+										</a>
+										<a th:href="@{/konsumen/delete/{id}(id=${konsumen.id})}" class="btn btn-danger">
+											<i class="fas fa-user-times ml-2"></i>
+										</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

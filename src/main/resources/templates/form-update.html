@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Tambah Konsumen</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+		crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+		integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+</head>
+
+<body>
+	<div class="container mt-4">
+		<div class="card">
+			<div class="card-body">
+				<div class="text-center">
+					<h1>Tambah Konsumen</h1>
+				</div>
+				<form th:action="@{/konsumen/update/{id}(id=${konsumen.id})}" method="post" th:object="${konsumen}">
+					<div class="m-3">
+						<div class="form-group">
+							<label class="col-4 col-form-label">Nama: </label>
+							<div class="col-8">
+								<input type="text" name="nama" id="nama" class="form-control" required th:field="*{nama}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-4 col-form-label">Alamat: </label>
+							<div class="col-8">
+								<input type="text" name="alamat" id="alamat" class="form-control" required th:field="*{alamat}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-4 col-form-label">Kota: </label>
+							<div class="col-8">
+								<input type="text" name="kota" id="kota" class="form-control" required th:field="*{kota}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-4 col-form-label">Provinsi: </label>
+							<div class="col-8">
+								<input type="text" name="provinsia" id="provinsi" class="form-control" required th:field="*{provinsi}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-4 col-form-label">Tanggal Registrasi: </label>
+							<div class="col-8">
+								<input type="date" name="tgl_registrasi" id="tgl_registrasi" class="form-control"
+									required th:field="*{tgl_registrasi}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-4 col-form-label">Status: </label>
+							<div class="col-8">
+								<select class="form-control" name="status">
+									<option disabled> Pilih status</option>
+									<option value="aktif" th:selected="${konsumen.status == 'aktif'}">Aktif</option>
+									<option value="non-aktif" th:selected="${konsumen.status == 'non-aktif'}">Non Aktif</option>
+								</select>
+							</div>
+						</div>
+						<div class="d-flex justify-content-end mt-5">
+							
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
